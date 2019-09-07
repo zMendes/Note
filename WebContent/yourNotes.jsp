@@ -33,11 +33,26 @@
 	}
 	
 	if (passwordMatch){
-		List<User> notes = dao.getNotes(username);
+		List<User> notes;
+		if (request.getParameter("Alpha")== null){
+			notes = dao.getNotes(username); }
+		else {
+			 notes = dao.getNotesAlphabetical(username);
+			}
 		
-		if (!notes.isEmpty()){ %>
+		
+		
+	if (!notes.isEmpty()){ %>
 	Olá <%=nickname %>, seja bem vindx. <br>
+	
+	
 	Suas notas:
+	
+	<form action="yourNotes.jsp">
+	<input type="hidden" name="Alpha" value="">
+	<input type = "submit" value="Sort by alphabetical">
+	</form>
+	
 	<table border='2'>
 	<tr>
 		<td><b>Nota</b></td>

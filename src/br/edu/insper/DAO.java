@@ -77,8 +77,32 @@ public class DAO {
 		}
 		
 		return notes;
+	}
 		
+	public List<User> getNotesAlphabetical(String username){
+			
+			
+		List<User> notes= new ArrayList<User>();
 		
+		PreparedStatement stmt;
+		
+		try {
+			stmt = connection.prepareStatement("SELECT User.username, Notes.id, Notes.content FROM User JOIN Notes ON Notes.user_id = User.id WHERE User.username = '" + username + "' ORDER BY Notes.content ASC");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				User user = new User();
+				user.setUsername(rs.getString("username"));
+				user.setNote(rs.getString("content"));
+				user.setNoteId(rs.getInt("id"));
+				notes.add(user);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		return notes;
+			
 	}
 	
 	public void adicionaUser(User user) {
