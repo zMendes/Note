@@ -74,8 +74,7 @@
 	</tr>
 
 <%}
-	session.setAttribute("username", username);
-	session.setAttribute("senha", password);
+	
 	}
 	else{ %>
 		<p> Você não tem nenhuma nota :(  .</p>
@@ -89,6 +88,7 @@ Clique <a href="adicionar.jsp">aqui</a> para adicionar uma nota.
 <%	} %>	
 <br>	
 <a href='index.html'>Logout</a> 
-    
+ <%session.setAttribute("username", username);
+	session.setAttribute("senha", password); %>
 </body>
 </html>
